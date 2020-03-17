@@ -34,6 +34,8 @@ outputs:
     description: 'The Terraform plan output.'
   tf_actions_fmt_written:
     description: 'Whether or not the Terraform formatting was written to source files.'
+  tf_actions_graph_written:
+    description: 'Whether or not the Terraform graph was written to source files.'
 runs:
   using: 'docker'
   image: './Dockerfile'

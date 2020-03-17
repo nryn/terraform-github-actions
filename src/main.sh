@@ -57,6 +57,11 @@ function parseInputs {
     tfFmtWrite=1
   fi
 
+  tfGraphOutputFile=""
+  if [ "${INPUT_TF_ACTIONS_GRAPH_OUTPUT_FILE}" != "" ]; then
+    tfGraphOutputFile=${INPUT_TF_ACTIONS_GRAPH_OUTPUT_FILE}
+  fi
+
   tfWorkspace="default"
   if [ -n "${TF_WORKSPACE}" ]; then
     tfWorkspace="${TF_WORKSPACE}"
@@ -115,6 +120,7 @@ function main {
   source ${scriptDir}/terraform_import.sh
   source ${scriptDir}/terraform_taint.sh
   source ${scriptDir}/terraform_destroy.sh
+  source ${scriptDir}/terraform_graph.sh
 
   parseInputs
   configureCLICredentials
@@ -156,6 +162,10 @@ function main {
     destroy)
       installTerraform
       terraformDestroy ${*}
+      ;;
+    graph)
+      installTerraform
+      terraformGraph ${*}
       ;;
     *)
       echo "Error: Must provide a valid value for terraform_subcommand"
