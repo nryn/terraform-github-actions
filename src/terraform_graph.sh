@@ -39,6 +39,8 @@ ${graphOutput}
   # Write changes to branch
   echo "::set-output name=tf_actions_graph_written::false"
   if [ "${tfGraphOutputFile}" != "" ]; then
+    pwd
+    ls -al
     echo "graph: info: terraform graph file will be written to ${tfGraphOutputFile}"
     terraform graph "${*}" > ${tfGraphOutputFile}
     graphExitCode=${?}
