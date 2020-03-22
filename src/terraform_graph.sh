@@ -38,10 +38,14 @@ ${graphOutput}
 
   # Write changes to branch
   echo "::set-output name=tf_actions_graph_written::false"
-  if [ "${tfGraphOutputFile}" != "" ]; then
-    touch ${tfGraphOutputFile}
-    echo "graph: info: terraform graph file will be written to ${tfGraphOutputFile}"
-    terraform graph "${*}" | cat > ${tfGraphOutputFile}
+  if [ "${tfGraphOutputFilePath}" != "" ]; then
+    tfGraphOutputDir=$(${tfGraphOutputFilePath%/*})
+    if [ "${tfGraphOutputDir}" != "${tfGraphOutputFilePath}" ]; then
+      mkdir -p ${tfGraphOutputDir} # Creates directories if needed
+    fi
+    touch ${tfGraphOutputFilePath}
+    echo "graph: info: terraform graph file will be written to ${tfGraphOutputFilePath}"
+    terraform graph "${*}" | cat > ${tfGraphOutputFilePath}
     graphExitCode=${?}
     echo "::set-output name=tf_actions_graph_written::true"
   fi

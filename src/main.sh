@@ -57,9 +57,9 @@ function parseInputs {
     tfFmtWrite=1
   fi
 
-  tfGraphOutputFile=""
+  tfGraphOutputFilePath=""
   if [ "${INPUT_TF_ACTIONS_GRAPH_OUTPUT_FILE}" != "" ]; then
-    tfGraphOutputFile=${INPUT_TF_ACTIONS_GRAPH_OUTPUT_FILE}
+    tfGraphOutputFilePath=${INPUT_TF_ACTIONS_GRAPH_OUTPUT_FILE}
   fi
 
   tfWorkspace="default"
