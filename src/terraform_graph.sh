@@ -39,7 +39,7 @@ ${graphOutput}
   # Write changes to branch
   echo "::set-output name=tf_actions_graph_written::false"
   if [ "${tfGraphOutputFilePath}" != "" ]; then
-    tfGraphOutputDir=$(${tfGraphOutputFilePath%/*})
+    tfGraphOutputDir=${tfGraphOutputFilePath%/*}
     if [ "${tfGraphOutputDir}" != "${tfGraphOutputFilePath}" ]; then
       mkdir -p ${tfGraphOutputDir} # Creates directories if needed
     fi
