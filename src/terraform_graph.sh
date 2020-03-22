@@ -8,12 +8,12 @@ function terraformGraph {
 
   # Exit code of 0 indicates success.
   if [ ${graphExitCode} -eq 0 ]; then
-    graphExitSummary = "info: graph created"
+    graphExitSummary="info: graph created"
   fi
 
   # Exit code of !0 indicates failure.
   if [ ${graphExitCode} -ne 0 ]; then
-    graphExitSummary = "error: failed to create graph"
+    graphExitSummary="error: failed to create graph"
   fi
 
   # Print the summary message and the graph output
@@ -39,6 +39,7 @@ ${graphOutput}
   # Write changes to branch
   echo "::set-output name=tf_actions_graph_written::false"
   if [ "${tfGraphOutputFile}" != "" ]; then
+    touch ${tfGraphOutputFile}
     echo "graph: info: terraform graph file will be written to ${tfGraphOutputFile}"
     terraform graph "${*}" | cat > ${tfGraphOutputFile}
     graphExitCode=${?}
