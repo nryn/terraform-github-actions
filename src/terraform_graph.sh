@@ -45,7 +45,7 @@ ${graphOutput}
     fi
     touch ${tfGraphOutputFilePath}
     echo "graph: info: terraform graph file will be written to ${tfGraphOutputFilePath}"
-    terraform graph "${*}" | cat > ${tfGraphOutputFilePath}
+    echo "${graphOutput}" > "${tfGraphOutputFilePath}"
     graphExitCode=${?}
     echo "::set-output name=tf_actions_graph_written::true"
   fi
